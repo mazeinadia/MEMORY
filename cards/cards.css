@@ -1,0 +1,20 @@
+.cards
+{
+    height: 510px;
+    width: 720px;
+    margin-top: 50px;
+    color: white;
+}
+
+.cards__row
+{
+    height: 170px;
+    width: 720px;
+}
+
+.cards__cell
+{
+    display: inline-block;
+    width: 100px;
+    margin: 0 10px;
+}

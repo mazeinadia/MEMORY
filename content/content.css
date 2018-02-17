@@ -1,0 +1,37 @@
+.content__game {
+  width: 720px;
+  height: 560px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  display: block;
+  text-align: center; }
+
+.content__start {
+  width: 520px;
+  height: 430px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  display: block;
+  text-align: center; }
+
+.content__end {
+  width: 520px;
+  height: 490px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  display: block;
+  text-align: center; }
+
+/*# sourceMappingURL=content.css.map */
