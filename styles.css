@@ -1,10 +1,10 @@
-@import url(./page/page.css);
-@import url(./content/content.css);
-@import url(./card/card.css);
-@import url(./text/text.css);
-@import url(./cards/cards.css);
-@import url(./button/button.css);
-@import url(./image/image__start.css);
-@import url(./image/image__end.css);
+@import url(src/page/page.css);
+@import url(src/content/content.css);
+@import url(src/cards/card/card.css);
+@import url(src/text/text.css);
+@import url(src/cards/cards.css);
+@import url(src/button/button.css);
+@import url(src/image/image__start.css);
+@import url(src/image/image__end.css);
 
 /*# sourceMappingURL=styles.css.map */

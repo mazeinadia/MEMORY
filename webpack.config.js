@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-    entry: "./js/app.jsx", // входная точка - исходный файл
+    entry: "./redux-index.jsx", // входная точка - исходный файл
     output:{
         path: path.resolve(__dirname, './public'),     // путь к каталогу выходных файлов - папка public
         publicPath: '/public/',
