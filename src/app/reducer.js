@@ -30,7 +30,7 @@ export default function memoryApp(state = InitialState, action){
             return closeOrDeleteCard(state, action);
         }
         case SHOW_CARDS: {
-            return showCards();
+            return showCards(action);
         }
         case HIDE_CARDS: {
             return hideCards(state);

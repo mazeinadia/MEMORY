@@ -1,4 +1,10 @@
-export function convertIntToCard(cardNumber)
+import {
+    COLUMN_COUNT,
+    ROW_COUNT
+} from "../../globals";
+import {List} from "immutable";
+
+function convertIntToCard(cardNumber)
 {
     let cardValue = Math.floor(cardNumber / 4);
     switch (cardValue) {
@@ -19,7 +25,7 @@ export function convertIntToCard(cardNumber)
     return (cardValue + suit);
 }
 
-export function cardDistribution(cardsCount)
+function cardDistribution(cardsCount)
 {
     let cardsArray = [], cardsChosen = [], cardNumber;
     for (let i = 0; i < cardsCount; i++) {
@@ -53,4 +59,35 @@ export function cardDistribution(cardsCount)
         freeElement = freeElement - 2;
     }
     return cardsArray;
+}
+
+export function getCardRows () {
+
+    let cardsCount = ROW_COUNT * COLUMN_COUNT,
+        cardRow = List([]),
+        rowIndex = 0,
+        cardIndex = 0,
+        cardRows = List([]);
+
+    const CardNamesArray = cardDistribution(cardsCount).map(cardIntValue => convertIntToCard(cardIntValue));
+
+    for (let i = 0; i < cardsCount; i++) {
+        cardRow = cardRow.push(
+            {
+                cardIndex: cardIndex,
+                rowIndex: rowIndex,
+                cardName: CardNamesArray[i],
+                flipped: false,
+                guessed: false
+            }
+        );
+        if (cardIndex === COLUMN_COUNT - 1) {
+            cardRows = cardRows.push(cardRow);
+            rowIndex++;
+            cardIndex = -1;
+            cardRow = List([]);
+        }
+        cardIndex++;
+    }
+    return cardRows;
 }
