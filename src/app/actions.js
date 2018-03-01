@@ -2,6 +2,8 @@
 * action types
 */
 
+import {getCardRows} from "../cards/card-service";
+
 export const OPEN_CARD = 'OPEN_CARD';
 export const CLOSE_CARD = 'CLOSE_CARD';
 export const SHOW_CARDS = 'SHOW_CARDS';
@@ -35,9 +37,10 @@ export function endGame() {
     }
 }
 
-export function showCards () {
+export function showCards (cardRows) {
     return {
-        type: SHOW_CARDS
+        type: SHOW_CARDS,
+        cardRows
     }
 }
 
@@ -86,7 +89,7 @@ let timeOutId = 0;
 export function startGame () {
     clearTimeout(timeOutId);
     return function (dispatch) {
-        dispatch(showCards());
+        dispatch(showCards(getCardRows()));
         timeOutId = setTimeout(dispatch, 5000, hideCards());
     }
 }
