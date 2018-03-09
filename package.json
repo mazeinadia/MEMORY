@@ -2,10 +2,10 @@
   "name": "memory",
   "version": "1.0.0",
   "description": "Memory Game",
-  "main": "StartGame.js",
+  "main": "public/index.html",
   "scripts": {
     "dev": "webpack-dev-server --hot --host 0.0.0.0 --port 8080",
-    "build": "webpack && gulp prod:assets",
+    "build": "webpack && gulp prod:styles",
     "test": "jest"
   },
   "author": "Nadia M.",
@@ -19,6 +19,7 @@
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-immutable": "^4.0.0",
+    "redux-mock-store": "^1.5.1",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
@@ -27,10 +28,13 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-sass": "^3.1.0",
     "jest": "^22.4.2",
+    "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.9.1"
   }

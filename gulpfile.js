@@ -2,18 +2,15 @@
 
 const gulp = require('gulp');
 const sass = require('gulp-sass');
-
-gulp.task('prod:assets', function () {
-    return gulp.src("assets/**/*.*")
-        .pipe(gulp.dest("public/assets"))
-});
+const concat = require('gulp-concat');
 
 gulp.task('prod:styles', function () {
-    return gulp.src("styles.scss")
-        .pipe(sass())
-        .pipe(gulp.dest("public"))
+    return gulp.src('./src/**/*.*css')
+        .pipe(concat('bundle.scss'))
+        .pipe(sass({outputStyle: 'compressed'}))
+        .pipe(gulp.dest('public'))
 });
 
-gulp.task('dev:sass', function () {
-    gulp.watch('**/*.scss', ['prod:styles']);
+gulp.task('dev:css', function () {
+    gulp.watch('./src/**/*.scss', ['prod:styles']);
 });

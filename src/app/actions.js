@@ -1,11 +1,11 @@
+import {getCardRows} from '../cards/cards.service'
+
 /*
 * action types
 */
 
-import {getCardRows} from "../cards/card-service";
-
 export const OPEN_CARD = 'OPEN_CARD';
-export const CLOSE_CARD = 'CLOSE_CARD';
+export const CLOSE_OR_DELETE_CARD = 'CLOSE_OR_DELETE_CARD';
 export const SHOW_CARDS = 'SHOW_CARDS';
 export const HIDE_CARDS = 'HIDE_CARDS';
 export const END_GAME = 'END_GAME';
@@ -25,7 +25,7 @@ export function openCard(rowIndex, cardIndex) {
 
 export function closeOrDeleteCard(rowIndex, cardIndex) {
     return {
-        type: CLOSE_CARD,
+        type: CLOSE_OR_DELETE_CARD,
         rowIndex,
         cardIndex
     }
@@ -60,10 +60,17 @@ export function loadStartPage() {
 * thunks
 */
 
+let timeOutId = 0;
+const delay = (ms) => new Promise(resolve => {
+    clearTimeout(timeOutId);
+    timeOutId = setTimeout(resolve, ms);
+    return timeOutId
+});
+
 export function cardClick (rowIndex, cardIndex, openedCards, cardPairsRestCount) {
     return function (dispatch) {
         if (openedCards.size === 0) {
-            dispatch(openCard(rowIndex, cardIndex));
+            dispatch(openCard(rowIndex, cardIndex))
         }
 
         if (openedCards.size === 1) {
@@ -71,26 +78,25 @@ export function cardClick (rowIndex, cardIndex, openedCards, cardPairsRestCount)
                 dispatch(openCard(rowIndex, cardIndex));
 
                 if (cardPairsRestCount === 1) {
-                    setTimeout(checkEnd, 1000, rowIndex, cardIndex);
+                    return delay(1000).then(() => {
+                        dispatch(closeOrDeleteCard(rowIndex, cardIndex));
+                        dispatch(endGame())
+                    })
                 } else {
-                    setTimeout(dispatch, 1000, closeOrDeleteCard(rowIndex, cardIndex));
+                    return delay(1000).then(() => {
+                        dispatch(closeOrDeleteCard(rowIndex, cardIndex))
+                    })
                 }
-            }
-
-            function checkEnd(rowIndex, cardIndex) {
-                dispatch(closeOrDeleteCard(rowIndex, cardIndex));
-                dispatch(endGame());
             }
         }
     }
 }
 
-let timeOutId = 0;
 export function startGame () {
-    clearTimeout(timeOutId);
     return function (dispatch) {
         dispatch(showCards(getCardRows()));
-        timeOutId = setTimeout(dispatch, 5000, hideCards());
+        return delay(5000).then(() => {
+            dispatch(hideCards())
+        })
     }
 }
-

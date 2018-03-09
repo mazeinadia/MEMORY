@@ -11,10 +11,13 @@
 .text_start-title{
     font-size: 28px;
     letter-spacing: .2px;
+    margin-bottom: 34px;
+    height: 38px;
 }
 
 .text_end-title{
     font-size: 24px;
+    height: 70px;
 }
 
 .text__back{
@@ -23,6 +26,7 @@
     color: rgba(255,255,255,0.85);
     cursor: pointer;
     margin-left: 10px;
+    font-weight: 600;
 }
 
 .text__score{

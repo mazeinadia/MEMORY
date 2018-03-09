@@ -1,3 +1,13 @@
 .image {
     color: white;
 }
+.image__start {
+    height: 262px;
+    width: 503px;
+    margin-bottom: 20px;
+}
+.image__end {
+    height: 275px;
+    width: 516px;
+    margin-bottom: 9px;
+}

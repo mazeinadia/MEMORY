@@ -1,22 +1,32 @@
-var path = require('path');
+const path = require('path');
+const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-    entry: "./redux-index.jsx", // входная точка - исходный файл
+    entry: "./src/redux-index.jsx",
     output:{
-        path: path.resolve(__dirname, './public'),     // путь к каталогу выходных файлов - папка public
+        path: path.resolve(__dirname, './public'),
         publicPath: '/public/',
-        filename: "bundle.js"       // название создаваемого файла
+        filename: "bundle.js"
     },
     module:{
-        rules:[   //загрузчик для jsx
+        rules:[
             {
-                test: /\.jsx?$/, // определяем тип файлов
-                exclude: /(node_modules)/,  // исключаем из обработки папку node_modules
-                loader: "babel-loader",   // определяем загрузчик
+                test: /\.jsx?$/,
+                exclude: /(node_modules)/,
+                loader: "babel-loader",
                 options:{
-                    presets:["env", "react"]    // используемые плагины
+                    presets:["env", "react"]
                 }
             }
         ]
-    }
-}
+    },
+    plugins: [
+        new UglifyJsPlugin({
+            sourceMap: true
+        }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
+        })
+    ]
+};
